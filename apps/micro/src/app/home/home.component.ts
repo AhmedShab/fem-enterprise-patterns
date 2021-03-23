@@ -8,25 +8,13 @@ import { v4 as uuidv4 } from 'uuid';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
-  price;
-  mode;
+  price: string;
+  mode: string;
   widgets: Widget[];
 
   reCalculateTotal(mode: string, widgets: Array<Widget>, widget: Widget) {
-    switch (mode) {
-      case 'create':
-        this.updateWidgets(mode, widgets, widget);
-        this.getTotalPrice(widgets);
-        break;
-      case 'update':
-        this.getTotalPrice(widgets);
-        break;
-      case 'delete':
-        this.getTotalPrice(widgets);
-        break;
-      default:
-        break;
-    } 
+    this.widgets = this.updateWidgets(mode, widgets, widget);
+    this.price = this.getTotalPrice(widgets);
   }
 
   updateWidgets(mode: string, widgets: Array<Widget>, widget: Widget) {
@@ -51,6 +39,7 @@ export class HomeComponent {
     return widgets.map(_widget => widget.id === _widget.id
       ? Object.assign({}, widget) : _widget);
   }
+
   deleteWidget(widgets: Array<any>, widget: any) {
     return widgets.filter(_widget => widget.id !== _widget.id);
   }
