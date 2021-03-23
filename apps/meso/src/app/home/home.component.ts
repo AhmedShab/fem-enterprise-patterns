@@ -10,6 +10,18 @@ interface Client extends BaseEntity {
   company: string;
 };
 
+interface ClientsState {
+  clients: Array<Client>;
+  currentClient: Client;
+};
+
+const newClient: Client = {
+  id: null,
+  firstname: '',
+  lastname: '',
+  company: '',
+};
+
 const peter: Client = {
   id: '1',
   firstname: 'Peter',
@@ -29,7 +41,12 @@ const clients: Array<Client> = [
   john
 ];
 
-const tango = clients;
+const initialClientState: ClientsState = {
+  clients,
+  currentClient: newClient,
+}
+
+const tango = initialClientState;
 
 @Component({
   selector: 'fem-home',
