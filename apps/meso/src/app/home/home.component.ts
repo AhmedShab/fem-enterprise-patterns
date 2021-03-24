@@ -15,12 +15,49 @@ interface ClientsState {
   currentClient: Client;
 };
 
+interface Project extends BaseEntity{
+  title: string;
+  description: string;
+  completed: boolean;
+}
+
+interface ProjectsState {
+  projects: Array<Project>;
+  currentProject: Project;
+};
+
+interface AppState {
+  clientsState: ClientsState;
+  projectsState: ProjectsState;
+};
+
 const newClient: Client = {
   id: null,
   firstname: '',
   lastname: '',
   company: '',
 };
+
+const newProject: Project = {
+  id: null,
+  title: '',
+  description: '',
+  completed: false,
+};
+
+const superProject: Project = {
+  id: '1',
+  title: 'Super Project',
+  description: 'This is awesome',
+  completed: false,
+}
+
+const hellProject: Project = {
+  id: '2',
+  title: 'Hell Project',
+  description: 'Stop...',
+  completed: true,
+}
 
 const peter: Client = {
   id: '1',
@@ -36,6 +73,11 @@ const john: Client = {
   company: 'NA'
 }
 
+const projects: Array<Project> = [
+ superProject,
+ hellProject,
+];
+
 const clients: Array<Client> = [
   peter,
   john
@@ -46,7 +88,17 @@ const initialClientState: ClientsState = {
   currentClient: newClient,
 }
 
-const tango = initialClientState;
+const initialProjectState: ProjectsState = {
+  projects,
+  currentProject: newProject,
+}
+
+const appState: AppState = {
+  clientsState: initialClientState,
+  projectsState: initialProjectState,
+};
+
+const tango = appState;
 
 @Component({
   selector: 'fem-home',
