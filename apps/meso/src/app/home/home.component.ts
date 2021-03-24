@@ -1,35 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
-interface BaseEntity {
-  id: string | null;
-};
-
-interface Client extends BaseEntity {
-  firstname: string;
-  lastname: string;
-  company: string;
-};
-
-interface ClientsState {
-  clients: Array<Client>;
-  currentClient: Client;
-};
-
-interface Project extends BaseEntity{
-  title: string;
-  description: string;
-  completed: boolean;
-}
-
-interface ProjectsState {
-  projects: Array<Project>;
-  currentProject: Project;
-};
-
-interface AppState {
-  clientsState: ClientsState;
-  projectsState: ProjectsState;
-};
+import { 
+  ClientsState, 
+  Client,
+  Project,
+  ProjectsState,
+  AppState,
+  ClientsStore
+} from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
 
 const newClient: Client = {
   id: null,
@@ -98,7 +75,11 @@ const appState: AppState = {
   projectsState: initialProjectState,
 };
 
-const tango = appState;
+const clientsStore = new ClientsStore(initialClientState);
+const currentClient = clientsStore.select('currentClient');
+
+const tango = clientsStore;
+
 
 @Component({
   selector: 'fem-home',
