@@ -9,7 +9,11 @@ import {
   ProjectStore,
   Action,
   CLIENT_LOAD,
+  CLIENT_CREATE,
+  CLIENT_UPDATE,
+  CLIENT_DELETE,
   CLIENT_SELECT,
+  CLIENT_CLEAR,
 } from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
 
 const newClient: Client = {
@@ -94,10 +98,32 @@ const currentProject = projectsStore.select('currentProject');
 
 const loadClient = (state: ClientsState, clients: Array<Client>) => {
   console.log('Load Clients', clients);
+  return state;
 }
 
 const selectClient = (state: ClientsState, clients: Array<Client>) => {
   console.log('Select Clients', clients);
+  return state;
+}
+
+const createClient = (state: ClientsState, payload: any) => {
+  console.log('Create Clients', clients);
+  return state;
+}
+
+const updateClient = (state: ClientsState, payload: any) => {
+  console.log('update Clients', clients);
+  return state;
+}
+
+const clearClient = (state: ClientsState, payload: any) => {
+  console.log('Clear Clients', clients);
+  return state;
+}
+
+const deleteClient = (state: ClientsState, payload: any) => {
+  console.log('Delete Clients', clients);
+  return state;
 }
 
 const clientsReducer = (state: ClientsState = initialClientState, action: Action) => {
@@ -107,6 +133,18 @@ const clientsReducer = (state: ClientsState = initialClientState, action: Action
 
     case CLIENT_SELECT:
       return selectClient(state, action.payload);
+
+    case CLIENT_CREATE:
+      return createClient(state, action.payload);
+
+    case CLIENT_UPDATE:
+      return updateClient(state, action.payload);
+
+    case CLIENT_DELETE:
+      return deleteClient(state, action.payload);
+    
+    case CLIENT_CLEAR:
+      return clearClient(state, action.payload);
 
     default:
       return state;
