@@ -88,3 +88,10 @@ export const CLIENT_UPDATE  = '[Client] Update';
 export const CLIENT_DELETE  = '[Client] Delete';
 export const CLIENT_SELECT  = '[Client] Select';
 export const CLIENT_CLEAR   = '[Client] Clear';
+
+export const PROJECT_LOAD    = '[Project] Load';
+export const PROJECT_CREATE  = '[Project] Create';
+export const PROJECT_UPDATE  = '[Project] Update';
+export const PROJECT_DELETE  = '[Project] Delete';
+export const PROJECT_SELECT  = '[Project] Select';
+export const PROJECT_CLEAR   = '[Project] Clear';
