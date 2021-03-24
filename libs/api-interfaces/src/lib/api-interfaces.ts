@@ -29,9 +29,9 @@ export interface ClientsState {
 };
 
 export interface Project extends BaseEntity{
-  title: string;
-  description: string;
-  completed: boolean;
+  title?: string;
+  description?: string;
+  completed?: boolean;
 }
 
 export interface ProjectsState {
@@ -73,5 +73,11 @@ export class ProjectStore {
 
   select(key: string) {
     return this.state[key];
+  }
+
+  update(id: string, project: Project) {
+    this.state.projects = this.state.projects.map(proj => {
+      return proj.id == id ? Object.assign(proj, project) : proj;
+    });
   }
 }

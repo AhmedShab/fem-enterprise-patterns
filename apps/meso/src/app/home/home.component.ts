@@ -30,6 +30,13 @@ const superProject: Project = {
   completed: false,
 }
 
+const updateSuperProject: Project = {
+  id: '1',
+  title: 'rename Super Project',
+  description: 'This is awesome',
+  completed: true,
+}
+
 const hellProject: Project = {
   id: '2',
   title: 'Hell Project',
@@ -82,7 +89,7 @@ const currentClient = clientsStore.select('currentClient');
 const projectsStore = new ProjectStore(initialProjectState);
 const currentProject = projectsStore.select('currentProject');
 
-const tango = currentProject;
+const tango = projectsStore;
 
 
 @Component({
