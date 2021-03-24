@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { 
-  ClientsState, 
+import {
+  ClientsState,
   Client,
   Project,
   ProjectsState,
   AppState,
   ClientsStore,
-  ProjectStore
+  ProjectStore,
+  Action,
+  CLIENT_LOAD,
+  CLIENT_SELECT,
 } from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
 
 const newClient: Client = {
@@ -59,8 +62,8 @@ const john: Client = {
 }
 
 const projects: Array<Project> = [
- superProject,
- hellProject,
+  superProject,
+  hellProject,
 ];
 
 const clients: Array<Client> = [
@@ -88,6 +91,27 @@ const currentClient = clientsStore.select('currentClient');
 
 const projectsStore = new ProjectStore(initialProjectState);
 const currentProject = projectsStore.select('currentProject');
+
+const loadClient = (state: ClientsState, clients: Array<Client>) => {
+  console.log('Load Clients', clients);
+}
+
+const selectClient = (state: ClientsState, clients: Array<Client>) => {
+  console.log('Select Clients', clients);
+}
+
+const clientsReducer = (state: ClientsState = initialClientState, action: Action) => {
+  switch (action.type) {
+    case CLIENT_LOAD:
+      return loadClient(state, action.payload);
+
+    case CLIENT_SELECT:
+      return selectClient(state, action.payload);
+
+    default:
+      return state;
+  }
+}
 
 const tango = projectsStore;
 

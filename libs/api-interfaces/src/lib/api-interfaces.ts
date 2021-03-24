@@ -81,3 +81,10 @@ export class ProjectStore {
     });
   }
 }
+
+export const CLIENT_LOAD    = '[Client] Load';
+export const CLIENT_CREATE  = '[Client] Create';
+export const CLIENT_UPDATE  = '[Client] Update';
+export const CLIENT_DELETE  = '[Client] Delete';
+export const CLIENT_SELECT  = '[Client] Select';
+export const CLIENT_CLEAR   = '[Client] Clear';
