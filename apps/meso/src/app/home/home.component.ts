@@ -5,7 +5,8 @@ import {
   Project,
   ProjectsState,
   AppState,
-  ClientsStore
+  ClientsStore,
+  ProjectStore
 } from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
 
 const newClient: Client = {
@@ -27,6 +28,13 @@ const superProject: Project = {
   title: 'Super Project',
   description: 'This is awesome',
   completed: false,
+}
+
+const updateSuperProject: Project = {
+  id: '1',
+  title: 'rename Super Project',
+  description: 'This is awesome',
+  completed: true,
 }
 
 const hellProject: Project = {
@@ -78,7 +86,10 @@ const appState: AppState = {
 const clientsStore = new ClientsStore(initialClientState);
 const currentClient = clientsStore.select('currentClient');
 
-const tango = clientsStore;
+const projectsStore = new ProjectStore(initialProjectState);
+const currentProject = projectsStore.select('currentProject');
+
+const tango = projectsStore;
 
 
 @Component({
