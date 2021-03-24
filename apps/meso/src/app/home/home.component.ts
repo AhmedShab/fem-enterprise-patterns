@@ -5,7 +5,8 @@ import {
   Project,
   ProjectsState,
   AppState,
-  ClientsStore
+  ClientsStore,
+  ProjectStore
 } from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
 
 const newClient: Client = {
@@ -78,7 +79,10 @@ const appState: AppState = {
 const clientsStore = new ClientsStore(initialClientState);
 const currentClient = clientsStore.select('currentClient');
 
-const tango = clientsStore;
+const projectsStore = new ProjectStore(initialProjectState);
+const currentProject = projectsStore.select('currentProject');
+
+const tango = currentProject;
 
 
 @Component({

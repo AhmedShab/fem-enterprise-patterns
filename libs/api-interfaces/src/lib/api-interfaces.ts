@@ -59,3 +59,19 @@ export class ClientsStore {
     return this.state[key];
   }
 }
+
+export class ProjectStore {
+  state: ProjectsState;
+
+  constructor(state: ProjectsState) {
+    this.state = state;
+  }
+
+  getState(){
+    return this.state;
+  }
+
+  select(key: string) {
+    return this.state[key];
+  }
+}
