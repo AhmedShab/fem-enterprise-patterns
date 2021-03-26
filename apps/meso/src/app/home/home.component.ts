@@ -7,13 +7,6 @@ import {
   AppState,
   ClientsStore,
   ProjectStore,
-  Action,
-  CLIENT_LOAD,
-  CLIENT_CREATE,
-  CLIENT_UPDATE,
-  CLIENT_DELETE,
-  CLIENT_SELECT,
-  CLIENT_CLEAR,
 } from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
 
 const newClient: Client = {
@@ -95,77 +88,6 @@ const currentClient = clientsStore.select('currentClient');
 
 const projectsStore = new ProjectStore(initialProjectState);
 const currentProject = projectsStore.select('currentProject');
-
-const loadClient = (state: ClientsState, clients: Array<Client>): ClientsState => {
-  return {
-    clients,
-    currentClient: state.currentClient,
-  }
-}
-
-const selectClient = (state: ClientsState, client: Client): ClientsState => {
-  return {
-    clients: state.clients,
-    currentClient: client,
-  }
-}
-
-const createClient = (state: ClientsState, client: Client): ClientsState => {
-  return {
-    clients: [...state.clients, client],
-    currentClient: state.currentClient,
-  }
-}
-
-const updateClient = (state: ClientsState, client: Client): ClientsState => {
-  return {
-    clients: state.clients.map(matchClient => {
-      return (matchClient.id == client.id) ? Object.assign({}, client) : matchClient;
-    }),
-    currentClient: state.currentClient
-  }
-}
-
-const clearClient = (state: ClientsState): ClientsState => {
-  return {
-    clients: state.clients,
-    currentClient: null,
-  }
-}
-
-const deleteClient = (state: ClientsState, client: Client): ClientsState => {
-  return {
-    clients: state.clients.filter(matchClient => {
-      return matchClient.id !== client.id
-    }),
-    currentClient: state.currentClient
-  }
-}
-
-const clientsReducer = (state: ClientsState = initialClientState, action: Action): ClientsState => {
-  switch (action.type) {
-    case CLIENT_LOAD:
-      return loadClient(state, action.payload);
-
-    case CLIENT_SELECT:
-      return selectClient(state, action.payload);
-
-    case CLIENT_CREATE:
-      return createClient(state, action.payload);
-
-    case CLIENT_UPDATE:
-      return updateClient(state, action.payload);
-
-    case CLIENT_DELETE:
-      return deleteClient(state, action.payload);
-
-    case CLIENT_CLEAR:
-      return clearClient(state);
-
-    default:
-      return state;
-  }
-}
 
 const tango = projectsStore;
 
