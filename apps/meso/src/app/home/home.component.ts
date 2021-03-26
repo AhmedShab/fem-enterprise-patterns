@@ -7,7 +7,10 @@ import {
   AppState,
   ClientsStore,
   ProjectStore,
+  CLIENT_SELECT,
+  CLIENT_CREATE,
 } from '../../../../../libs/api-interfaces/src/lib/api-interfaces';
+import clientsReducer from '../../store/clientReducer';
 
 const newClient: Client = {
   id: null,
@@ -52,8 +55,15 @@ const peter: Client = {
 };
 
 const john: Client = {
-  id: '1',
+  id: '2',
   firstname: 'John',
+  lastname: 'Doe',
+  company: 'NA'
+}
+
+const jane: Client = {
+  id: '3',
+  firstname: 'jane',
   lastname: 'Doe',
   company: 'NA'
 }
@@ -83,13 +93,15 @@ const appState: AppState = {
   projectsState: initialProjectState,
 };
 
-const clientsStore = new ClientsStore(initialClientState);
+const clientsStore = new ClientsStore(initialClientState, clientsReducer);
 const currentClient = clientsStore.select('currentClient');
+clientsStore.dispatch({ type: CLIENT_CREATE, payload:  jane })
+const allClients = clientsStore.select('clients');
 
 const projectsStore = new ProjectStore(initialProjectState);
 const currentProject = projectsStore.select('currentProject');
 
-const tango = projectsStore;
+const tango = allClients;
 
 
 @Component({

@@ -45,10 +45,12 @@ export interface AppState {
 };
 
 export class ClientsStore {
+  reducer;
   state: ClientsState;
 
-  constructor(state: ClientsState) {
+  constructor(state: ClientsState, reducer) {
     this.state = state;
+    this.reducer = reducer;
   }
 
   getState() {
@@ -57,6 +59,10 @@ export class ClientsStore {
 
   select(key: string) {
     return this.state[key];
+  }
+
+  dispatch(action: Action) {
+    this.state = this.reducer(this.state, action);
   }
 }
 

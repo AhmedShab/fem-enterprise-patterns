@@ -18,7 +18,7 @@ const peter: Client = {
   };
   
   const john: Client = {
-    id: '1',
+    id: '2',
     firstname: 'John',
     lastname: 'Doe',
     company: 'NA'
