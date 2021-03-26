@@ -96,37 +96,53 @@ const currentClient = clientsStore.select('currentClient');
 const projectsStore = new ProjectStore(initialProjectState);
 const currentProject = projectsStore.select('currentProject');
 
-const loadClient = (state: ClientsState, clients: Array<Client>) => {
-  console.log('Load Clients', clients);
-  return state;
+const loadClient = (state: ClientsState, clients: Array<Client>): ClientsState => {
+  return {
+    clients,
+    currentClient: state.currentClient,
+  }
 }
 
-const selectClient = (state: ClientsState, clients: Array<Client>) => {
-  console.log('Select Clients', clients);
-  return state;
+const selectClient = (state: ClientsState, client: Client): ClientsState => {
+  return {
+    clients: state.clients,
+    currentClient: client,
+  }
 }
 
-const createClient = (state: ClientsState, payload: any) => {
-  console.log('Create Clients', clients);
-  return state;
+const createClient = (state: ClientsState, client: Client): ClientsState => {
+  return {
+    clients: [...state.clients, client],
+    currentClient: state.currentClient,
+  }
 }
 
-const updateClient = (state: ClientsState, payload: any) => {
-  console.log('update Clients', clients);
-  return state;
+const updateClient = (state: ClientsState, client: Client): ClientsState => {
+  return {
+    clients: state.clients.map(matchClient => {
+      return (matchClient.id == client.id) ? Object.assign({}, client) : matchClient;
+    }),
+    currentClient: state.currentClient
+  }
 }
 
-const clearClient = (state: ClientsState, payload: any) => {
-  console.log('Clear Clients', clients);
-  return state;
+const clearClient = (state: ClientsState): ClientsState => {
+  return {
+    clients: state.clients,
+    currentClient: null,
+  }
 }
 
-const deleteClient = (state: ClientsState, payload: any) => {
-  console.log('Delete Clients', clients);
-  return state;
+const deleteClient = (state: ClientsState, client: Client): ClientsState => {
+  return {
+    clients: state.clients.filter(matchClient => {
+      return matchClient.id !== client.id
+    }),
+    currentClient: state.currentClient
+  }
 }
 
-const clientsReducer = (state: ClientsState = initialClientState, action: Action) => {
+const clientsReducer = (state: ClientsState = initialClientState, action: Action): ClientsState => {
   switch (action.type) {
     case CLIENT_LOAD:
       return loadClient(state, action.payload);
@@ -142,9 +158,9 @@ const clientsReducer = (state: ClientsState = initialClientState, action: Action
 
     case CLIENT_DELETE:
       return deleteClient(state, action.payload);
-    
+
     case CLIENT_CLEAR:
-      return clearClient(state, action.payload);
+      return clearClient(state);
 
     default:
       return state;
